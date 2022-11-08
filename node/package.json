@@ -1,0 +1,14 @@
+{
+  "name": "seiri",
+  "version": "1.0.0",
+  "description": "SEiri discord.js server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "me (kegan)",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.6.0"
+  }
+}
