@@ -14,7 +14,7 @@ const spawn = require("child_process").spawn;
 // });
 
 function dsStart(input) {
-    const ds = spawn('python', ['./python/ds.py', input]);
+    const ds = spawn('python', ['./node/python/ds.py', input]);
 
     ds.stdout.on('data', (data) => {
         console.log(data.toString());
