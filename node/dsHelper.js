@@ -28,4 +28,19 @@ function dsStart(input) {
     else return false;
 }
 
-module.exports = {dsStart};     
+function speak(text) {
+    const ds = spawn('python', ['./python/textToSpeech.py', text]);
+
+    ds.stdout.on('data', (data) => {
+        console.log(data.toString());
+    });
+
+    ds.stderr.on('data', (data) => {
+        console.error(data.toString());
+    });
+
+    if (ds) return true;
+    else return false;
+}
+
+module.exports = {dsStart, speak};     

@@ -3,6 +3,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Events, GatewayIntentBits, Collection, MessageManager } = require('discord.js');
 const { token } = require("./config.json");
+const { speak } = require("./dsHelper.js");
 
 // intents needed to view guilds, as well as new messages
 // i suppose it's possible to try and use slash commands to send messages instead :Hmm:
@@ -59,12 +60,10 @@ client.on(Events.MessageCreate, message => {
     if (message.guildId != client.activeGuild || message.channelId != client.activeChannel) return;
 
     console.log(`new message\n${message.content}`);
-    fs.writeFile("tts.txt", message.content, (e) => {
-        if (e) console.error(e);
-        else {
-            console.log("Message saved");
-        }
-    });
+
+    speak(message.content);
 });
 
 client.login(token);
+
+// nice
