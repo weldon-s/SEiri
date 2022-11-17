@@ -2,6 +2,23 @@ const randomInt = (max) => Math.floor(Math.random() * max); //returns integer in
 
 const match = (array, string) => array.some(elem => string.includes(elem)); //returns true iff at least one element is contained within string
 
+// counts the number of occurances of each canned response in the input, returns the most common one
+const optimalresponse = (input, responsearray) => {
+    let max = 0;
+    let response = undefined;
+    let len;
+
+    for (let i = 0; i<responsearray.length; i++) {
+        len = (responsearray[i].keywords.filter(value => input.includes(value))).length
+        if (len > max) {
+            max = len;
+            response = responsearray[i]
+        }
+    }
+
+    return response;
+}
+
 const responseObject = (keywords, response) => {return {keywords: keywords, response: response}};
 
 const PHYSICS_KEYWORDS = ['physics', 'ece', 'one oh five'];
@@ -63,7 +80,8 @@ const RESPONSE_ARRAY = [
 
 //returns special response if one found, null otherwise
 const generateResponse = (input) => {
-    let chosenResponse = RESPONSE_ARRAY.find(elem => match(elem.keywords, input));
+    // let chosenResponse = RESPONSE_ARRAY.find(elem => match(elem.keywords, input));
+    let chosenResponse = optimalresponse(input, RESPONSE_ARRAY);
 
     if(chosenResponse === undefined){
         return randomResponse();
