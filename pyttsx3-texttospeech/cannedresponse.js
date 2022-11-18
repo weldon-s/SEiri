@@ -26,6 +26,18 @@ const CALI_KEYWORDS = ['cali', 'california', 'co-op'];
 const POINTER_KEYWORDS = ['pointer', 'pointers'];
 const ANTI_SON_KEYWORDS = ['son', 'father', 'derivative', 'antiderivative'];
 const PIZZA_KEYWORDS = ['pizza', 'pizzas'];
+const ECE_105_MIDTERM_MEAN_KEYWORDS = ['ece', 'one oh five', 'midterm', 'average', 'mean'];
+const CS_137_MEAN_KEYWORDS = ['cs', 'one thirty seven', 'midterm', 'average', 'mean'];
+const MATH_117_MEAN_KEYWORDS = ['math', 'one seventeen', 'midterm', 'average', 'mean'];
+const MATH_135_FIRST_MEAN_KEYWORDS = ['math', 'one thirty five', 'midterm', 'average', 'mean', 'first'];
+const MATH_115_MEAN_KEYWORDS = ['math', 'one fifteen', 'midterm', 'average', 'mean'];
+
+const ece105midtermResponse = () => 'The average for the ece one oh five midterm was 58.9% and the median was 62.5%';
+const cs137midtermResponse = () => 'The average for the cs one thirty seven midterm was 76.9% and the median was 82%';
+const math117midtermResponse = () => 'The average for the math one seventeen midterm was 63.8% and the median was 64.9%';
+const math135firstmidtermResponse = () => 'The average for the math one thrity five midterm was 76.4% and the median was 78.9%';
+const math115midtermResponse = () => 'The average for the math one fifteen midterm was 79% and the median was 83.7%';
+ 
 
 const physicsResponse = () => {
     switch(randomInt(3)){
@@ -75,7 +87,12 @@ const RESPONSE_ARRAY = [
     responseObject(CALI_KEYWORDS, caliResponse),
     responseObject(POINTER_KEYWORDS, pointerResponse),
     responseObject(ANTI_SON_KEYWORDS, antiSonResponse),
-    responseObject(PIZZA_KEYWORDS, pizzaResponse)
+    responseObject(PIZZA_KEYWORDS, pizzaResponse),
+    responseObject(ECE_105_MIDTERM_MEAN_KEYWORDS, ece105midtermResponse),
+    responseObject(CS_137_MEAN_KEYWORDS, cs137midtermResponse),
+    responseObject(MATH_117_MEAN_KEYWORDS, math117midtermResponse),
+    responseObject(MATH_135_FIRST_MEAN_KEYWORDS, math135firstmidtermResponse),
+    responseObject(MATH_115_MEAN_KEYWORDS, math115midtermResponse)
 ];
 
 //returns special response if one found, null otherwise
