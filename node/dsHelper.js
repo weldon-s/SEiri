@@ -28,6 +28,4 @@ function dsStart(input) {
     else return false;
 }
 
-dsStart(2)
-
 module.exports = {dsStart};     
