@@ -2,7 +2,7 @@ const spawn = require("child_process").spawn;
 
 // adapted from https://stackoverflow.com/questions/23450534/how-to-call-a-python-function-from-node-js
 // let dsStart = new Promise(() => { // is this notation bad? idk and idc
-//     const ds = spawn('python', ['./python/ds.py']);
+//     const ds = spawn('python', ['./python/ds.py', text]);
 
 //     ds.stdout.on('data', (data) => {
 //         console.log(data);
@@ -28,6 +28,9 @@ function dsStart(input) {
     else return false;
 }
 
+
+module.exports = {dsStart};     
+
 function speak(text) {
     const ds = spawn('python', ['./python/textToSpeech.py', text]);
 
@@ -38,9 +41,10 @@ function speak(text) {
     ds.stderr.on('data', (data) => {
         console.error(data.toString());
     });
-
+     
     if (ds) return true;
     else return false;
 }
 
-module.exports = {dsStart, speak};     
+//module.exports = {dsStart, speak};
+
