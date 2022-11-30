@@ -9,8 +9,8 @@ import os
 SEARCH_STRING = "https://www.youtube.com/results?search_query="
 VIDEO_STRING = "https://www.youtube.com/"
 EXTENSION = "mp4"
-AUDIO_PATH = "youtube/audio"
-CONTROL_PATH = "youtube/control"
+AUDIO_PATH = "node/youtube/audio"
+CONTROL_PATH = "node/youtube/control"
 
 def fetchAudio(input):
     content = urllib.request.urlopen(SEARCH_STRING + input.replace(" ", "_"))
