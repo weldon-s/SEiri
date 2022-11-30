@@ -3,7 +3,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Events, GatewayIntentBits, Collection, MessageManager } = require('discord.js');
 const { token } = require("./config.json");
-const { speak } = require("./dsHelper.js");
+const { speak, listen } = require("./pythonHelper.js");
+const { generateResponse } = require("./cannedresponse.js");
 
 // intents needed to view guilds, as well as new messages
 // i suppose it's possible to try and use slash commands to send messages instead :Hmm:
@@ -35,8 +36,24 @@ for (const file of commandFiles) {
 
 // left off at https://discordjs.guide/creating-your-bot/command-handling.html#loading-command-files
 
+async function listenAndRespond() {
+    return listen().then(text => {
+        console.log(text);
+        speak(generateResponse(text.slice(0, text.length-1)));
+    }).catch(e => {
+        console.log("error listening. failed to understand that communication is key")
+        console.error(e);
+    }).then(() => {
+        listenAndRespond(); // is infinite recursion a problem? hopefully not haha
+    });
+}
+
 client.once(Events.ClientReady, c => {
+    speak("online!");
+
     console.log(`Bot loaded as ${c.user.tag}`);
+    listenAndRespond()
+    .catch(e => console.error(e));
 });
 
 client.on(Events.InteractionCreate, async interaction => {

@@ -53,10 +53,10 @@ const generateResponse = (input) => {
     let chosenResponse = RESPONSE_ARRAY.find(elem => match(elem.keywords, input));
 
     if(chosenResponse === undefined){
-        return null;
+        return input;
     }
 
     return chosenResponse.response();
 }
 
-export {generateResponse};
+module.exports = {generateResponse};
