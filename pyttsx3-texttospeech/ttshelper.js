@@ -6,4 +6,7 @@ const toTTS = (...text) => {
     const tts = spawn('python', args);
 }
 
-const sendResponseToTTS = (input) => toTTS(bot.generateResponse(input));
+const speak = (text) => toTTS(input);
+
+module.exports = {speak};
+//const sendResponseToTTS = (input) => toTTS(bot.generateResponse(input));

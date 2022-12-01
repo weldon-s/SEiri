@@ -27,7 +27,7 @@ const caliResponse = () => 'The only acceptable co-ops are Cali co-ops';
 const pointerResponse = () => {
     switch(randomInt(3)){
         case 1:
-            return "Don't ask me about pointers, I was written in JavaScript";
+            return "Don't ask me about pointers, I was written in JavaScript and Python";
         case 2:
             return 'Kill the children before the parents'
         default:
