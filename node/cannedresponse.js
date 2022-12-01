@@ -43,6 +43,10 @@ const timeResponse = () => {
     let minutes = today.getMinutes();
     let AMorPM;
 
+    if(minutes < 10){
+        minutes = "oh " + minutes;
+    }
+
     if(hours <= 12){
         AMorPM = "A M";
     }
