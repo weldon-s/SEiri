@@ -13,7 +13,7 @@ import adafruit_dotstar
 DOTSTAR_DATA = board.D5
 DOTSTAR_CLOCK = board.D6
 
-dots = adafruit_dotstar.DotStar(DOTSTAR_CLOCK, DOTSTAR_DATA, 3, brightness=0.2)
+dots = adafruit_dotstar.DotStar(DOTSTAR_CLOCK, DOTSTAR_DATA, 3, brightness=1)
 
 def setColor(l, color):
     dots[l] = color
@@ -80,7 +80,6 @@ while not begun:
 
 print("!pause\n")
 sys.stdout.flush()
-sleep(2)
 
 recording_frames = []
 audio = pyaudio.PyAudio()

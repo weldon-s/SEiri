@@ -22,6 +22,8 @@ function send(message, client) {
 }
 
 const interpret = (speech, client) => {
+    if (speech.length <= 2) return;
+
     if(speech === "pause"){
         return pause();
     }

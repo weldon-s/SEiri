@@ -18,7 +18,7 @@ lines = sys.argv[1]
 
 def setup():
     # Set properties _before_ you add things to say
-    engine.setProperty('rate', 200)    # Speed percent (can go over 100)
+    engine.setProperty('rate', 100)    # Speed percent (can go over 100)
     engine.setProperty('volume', 1)  # Volume 0-1
     # engine.setProperty('voice', en_voice_id) # Female English voice
 

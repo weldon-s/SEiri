@@ -39,6 +39,7 @@ for (const file of commandFiles) {
 async function listenAndRespond() {
     return listen().then(text => {
         console.log(text);
+        transcribe(text);
         interpret(text.slice(0, text.length-1), client);
     }).catch(e => {
         console.log("error listening. failed to understand that communication is key")
@@ -46,6 +47,17 @@ async function listenAndRespond() {
         speak("whoops, something went wrong")
     }).then(() => {
         listenAndRespond(); // is infinite recursion a problem? hopefully not haha
+    });
+}
+
+function transcribe(string) {
+    if (string.length <= 2) return;
+    client.channels.fetch("1048010211820056607")
+    .then(channel => {
+        channel.send(string);
+    }).catch(err => {
+        console.log("error fetching");
+        console.error(err);
     });
 }
 
