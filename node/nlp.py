@@ -17,9 +17,6 @@ def getKeywords(text):
             result.append(token.text)
 
     return result
-new_text = """
-What was the math one seventeen midterm average?
-"""
 
 # text 1 and 2 can be lists
 def textToText(text1, text2):
