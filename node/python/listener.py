@@ -78,9 +78,9 @@ while not begun:
         begun = True
         # Record
 
-# print("!pause\n")
+print("!pause\n")
 sys.stdout.flush()
-# sleep(2)
+sleep(2)
 
 recording_frames = []
 audio = pyaudio.PyAudio()
@@ -134,7 +134,7 @@ sys.stdout.flush()
 # hand-written tho, i'm not copy pasting anything from the internet
 wavOutput = 'filtered.wav'
 
-cutOffFrequency = 1000
+cutOffFrequency = 1200
 
 #copied from somewhere, check stackoverflow
 def running_mean(x, windowSize):
