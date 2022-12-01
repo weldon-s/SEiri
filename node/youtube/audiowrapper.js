@@ -32,3 +32,5 @@ const play = (song) => {
 const switchSong = (song) => fs.writeFileSync('/home/pi/SEiri/node/youtube/control/command.txt', '2 ' + song);
 
 module.exports = {pause, play};
+
+activateMusic()
