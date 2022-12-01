@@ -78,7 +78,7 @@ while not begun:
         begun = True
         # Record
 
-print("!pause")
+# print("!pause")
 
 recording_frames = []
 audio = pyaudio.PyAudio()
@@ -122,7 +122,7 @@ waveFile.setframerate(RATE_PROCESS)
 waveFile.writeframes(b''.join(recording_frames))
 waveFile.close()
 
-print("!resume")
+# print("!resume")
 
 # all of this is from stackoverflow.com/questions/24820346/filtering-a-wav-file-using-python, and the respective references there
 # hand-written tho, i'm not copy pasting anything from the internet

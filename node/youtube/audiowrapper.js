@@ -33,4 +33,4 @@ const switchSong = (song) => fs.writeFileSync('/home/pi/SEiri/node/youtube/contr
 
 module.exports = {pause, play};
 
-activateMusic()
+// activateMusic()
