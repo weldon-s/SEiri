@@ -66,7 +66,7 @@ for i in range(600): #for testing, stop after a minute
             fetchAudio(nextSong)
             songList = os.listdir(AUDIO_PATH)
 
-            if(len(songList) > 20):
+            if(len(songList) > MAX_SONGS):
                 os.remove(AUDIO_PATH + "/" + songList[0])
                 songList = os.listdir(AUDIO_PATH)
 
