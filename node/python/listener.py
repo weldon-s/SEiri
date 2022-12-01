@@ -78,24 +78,29 @@ while not begun:
         begun = True
         # Record
 
-# print("!pause")
+# print("!pause\n")
+sys.stdout.flush()
+# sleep(2)
 
 recording_frames = []
 audio = pyaudio.PyAudio()
 
-# info = audio.get_host_api_info_by_index(0)
-# numdevices = info.get('deviceCount')
-# for i in range(0, numdevices):
-#     if (audio.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
-#         print("Input Device id ", i, " - ", audio.get_device_info_by_host_api_device_index(0, i).get('name'))
+info = audio.get_host_api_info_by_index(0)
+numdevices = info.get('deviceCount')
+device_id = 2
+for i in range(0, numdevices):
+    if (audio.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
+        if (audio.get_device_info_by_host_api_device_index(0, i).get('name')[:5] == "seeed"):
+            device_id = i 
+            # print("Input Device id ", i, " - ", audio.get_device_info_by_host_api_device_index(0, i).get('name'))
 
 stream = audio.open(
     format=FORMAT,
     channels=CHANNELS,
     rate=RATE_PROCESS,
     input=True,
-    # input_device_index = device_id,
-    input_device_index = 2, #by inspection
+    input_device_index = device_id,
+    # input_device_index = 2, #by inspection
     frames_per_buffer=CHUNK_SIZE
 )
 
@@ -109,7 +114,7 @@ while not button.value and i < BITRATE/CHUNK_SIZE * MAX_LENGTH:
 
 # print("processing")
 
-lerpColor((100, 0, 100), 100)
+lerpColor((100, 0, 100), 50)
 
 stream.stop_stream()
 stream.close()
@@ -122,7 +127,8 @@ waveFile.setframerate(RATE_PROCESS)
 waveFile.writeframes(b''.join(recording_frames))
 waveFile.close()
 
-# print("!resume")
+print("!resume")
+sys.stdout.flush()
 
 # all of this is from stackoverflow.com/questions/24820346/filtering-a-wav-file-using-python, and the respective references there
 # hand-written tho, i'm not copy pasting anything from the internet
@@ -183,5 +189,6 @@ fin.close()
 
 infered_text = model.stt(audio)
 
-print(">" + infered_text)
+print(">" + infered_text + '\n')
+sys.stdout.flush()
 lerpColor((0, 0, 0), 150)

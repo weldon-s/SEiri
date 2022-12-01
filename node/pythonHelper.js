@@ -21,18 +21,27 @@ const spawn = require("child_process").spawn;
 // at this point, listen will be re-called when the code is ready again
 async function listen() {
     console.log("spawned a listener")
-    const listener = spawn('python/bin/python', ['/home/pi/SEiri/node/python/listener.py']);
+    const listener = spawn('python/bin/python', ['/home/pi/SEiri/node/python/listener.py', '-u']);
 
     // when it outputs anything, if it's a string, that must be detected audio
     return new Promise((resolve, reject) => {
         listener.stdout.on('data', (data) => {
+            console.log("+++ recieved data from python");
             if (typeof data == `string` || data instanceof String) {
-                console.log(data);
+                // if (data.charAt(0) == '>') resolve(data.slice(1));
+                // else if (data.charAt(0) == '!') {
+                //     if (data == "!pause") pause();
+                //     else if (data == "!resume") play();
+                // } else {
+                //     console.log(data)
+                // }
+                console.log(data)
             } else {
+                console.log("---recieved buffer from python");
                 if (data.toString().charAt(0) == '>') resolve(data.toString().slice(1));
                 else if (data.toString().charAt(0) == '!') {
-                    if (data.toString() == "!pause") pause();
-                    else if (data.toString() == "!resume") play();
+                    if (data.toString().includes("!pause")) pause();
+                    else if (data.toString().includes("!resume")) play();
                 }
                 else {
                     console.log(data.toString());
@@ -42,8 +51,12 @@ async function listen() {
     
         listener.stderr.on('data', (data) => {
             console.error(data.toString());
-            // if (data.toString().length > 100) reject("!ERROR: the python code has crashed!");
         })    
+
+        listener.on('close', (code) => {
+            if (code == 0) resolve("!!!no text outputted");
+            else reject(`listener exited with error code ${code}`);
+        })
     });
 }
 

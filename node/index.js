@@ -43,8 +43,7 @@ async function listenAndRespond() {
     }).catch(e => {
         console.log("error listening. failed to understand that communication is key")
         console.error(e);
-        // speak("whoops, something went wrong")
-        // listenAndRespond();
+        speak("whoops, something went wrong")
     }).then(() => {
         listenAndRespond(); // is infinite recursion a problem? hopefully not haha
     });

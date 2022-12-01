@@ -31,7 +31,7 @@ const interpret = (speech, client) => {
         return play();
     }
 
-    for (string of ["send", "reply", "replied"]) {
+    for (string of ["send", "reply", "replied", "and"]) {
         if (speech.startsWith(string)) {
             return send(speech.substring(string.length+1), client); // id like to hard code this but weldon didn't so whatever
         }
