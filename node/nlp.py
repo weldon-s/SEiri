@@ -8,7 +8,7 @@ nlp = spacy.load("en_core_web_sm")
 
 def getKeywords(text):
     result = []
-    pos_tag = ['PROPN', 'ADJ', 'NOUN', 'NUM'] 
+    pos_tag = ['PROPN', 'ADJ', 'NOUN', 'NUM', 'VERB'] 
     doc = nlp(text.lower()) 
     for token in doc:
         if(token.text in nlp.Defaults.stop_words or token.text in punctuation):
