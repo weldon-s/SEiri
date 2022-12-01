@@ -5,6 +5,7 @@ import { generateResponse } from "./cannedresponse.js";
 const interpret = (speech) => {
     if(speech === "pause"){
         pause();
+        speak("music paused")
     }
 
     if(speech.startsWith("play")){
@@ -12,8 +13,12 @@ const interpret = (speech) => {
             play();
         }
 
+        console.log(speech.substring("play".length + 1))
+
         play(speech.substring("play".length + 1))
     }
 
     speak(generateResponse(speech))    
 };
+
+interpret("hello")

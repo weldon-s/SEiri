@@ -1,16 +1,17 @@
-import urllib.request
-import re
-import webbrowser
-from pytube import YouTube
-import vlc
-import time
 import os
+from pytube import YouTube
+import re
+import time
+import urllib.request
+import vlc
+
 
 SEARCH_STRING = "https://www.youtube.com/results?search_query="
 VIDEO_STRING = "https://www.youtube.com/"
 EXTENSION = "mp4"
 AUDIO_PATH = "node/youtube/audio"
 CONTROL_PATH = "node/youtube/control"
+MAX_SONGS = 20
 
 def fetchAudio(input):
     content = urllib.request.urlopen(SEARCH_STRING + input.replace(" ", "_"))
@@ -35,6 +36,8 @@ media = None
 currentSong = None
 
 songList = os.listdir(AUDIO_PATH)
+sorted(songList, key = lambda path: os.path.getmtime(AUDIO_PATH + "/" + path))
+
 
 #0 for pause, 1 for play, 2 for selecting new song
 while True:
@@ -58,6 +61,11 @@ while True:
         if not((nextSong + "." + EXTENSION) in songList):
             fetchAudio(nextSong)
             songList = os.listdir(AUDIO_PATH)
+
+            if(len(songList) > 20):
+                os.remove(AUDIO_PATH + "/" + songList[0])
+                songList = os.listdir(AUDIO_PATH)
+
 
         if currentSong != nextSong:
             if media != None:

@@ -29,3 +29,5 @@ const play = (song) => {
 const switchSong = (song) => fs.writeFileSync('node/youtube/control/command.txt', '2 ' + song);
 
 module.exports = {pause, play};
+
+activateMusic()
