@@ -53,7 +53,7 @@ const generateResponse = (input) => {
     let chosenResponse = RESPONSE_ARRAY.find(elem => match(elem.keywords, input));
 
     if(chosenResponse === undefined){
-        return input;
+        return "my features are limited and my processor is small";
     }
 
     return chosenResponse.response();

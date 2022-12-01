@@ -1,4 +1,5 @@
 const { toUSVString } = require("util");
+const {pause, play} = require("./youtube/audiowrapper.js")
 
 const spawn = require("child_process").spawn;
 
@@ -19,29 +20,29 @@ const spawn = require("child_process").spawn;
 // the idea is for listen() to wait until the button is pressed, record audio, parse that audio, and return the text
 // at this point, listen will be re-called when the code is ready again
 async function listen() {
+    console.log("spawned a listener")
     const listener = spawn('python/bin/python', ['/home/pi/SEiri/node/python/listener.py']);
 
     // when it outputs anything, if it's a string, that must be detected audio
     return new Promise((resolve, reject) => {
         listener.stdout.on('data', (data) => {
             if (typeof data == `string` || data instanceof String) {
-                // if (data.charAt(0) == '>') resolve(data.slice(1));
-                // else console.log(data);
                 console.log(data);
             } else {
-                // idk when this would ever happen
-                // // update- turns out this is actually what we're looking for
-                // console.log("Unusual linstener output:");
-                // console.log(data.toString());
-                // reject("!WARNING: unusual output")
-                console.log("data");
-                resolve(data.toString());
+                if (data.toString().charAt(0) == '>') resolve(data.toString().slice(1));
+                else if (data.toString().charAt(0) == '!') {
+                    if (data.toString() == "!pause") pause();
+                    else if (data.toString() == "!resume") play();
+                }
+                else {
+                    console.log(data.toString());
+                }
             }
         });
     
         listener.stderr.on('data', (data) => {
             console.error(data.toString());
-            // reject("!ERROR: the python code has crashed!");
+            // if (data.toString().length > 100) reject("!ERROR: the python code has crashed!");
         })    
     });
 }

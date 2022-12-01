@@ -4,7 +4,7 @@ const path = require("node:path");
 const { Client, Events, GatewayIntentBits, Collection, MessageManager } = require('discord.js');
 const { token } = require("./config.json");
 const { speak, listen } = require("./pythonHelper.js");
-const { generateResponse } = require("./cannedresponse.js");
+const { interpret } = require("./speech-interpret.js");
 
 // intents needed to view guilds, as well as new messages
 // i suppose it's possible to try and use slash commands to send messages instead :Hmm:
@@ -39,10 +39,12 @@ for (const file of commandFiles) {
 async function listenAndRespond() {
     return listen().then(text => {
         console.log(text);
-        speak(generateResponse(text.slice(0, text.length-1)));
+        interpret(text.slice(0, text.length-1), client);
     }).catch(e => {
         console.log("error listening. failed to understand that communication is key")
         console.error(e);
+        // speak("whoops, something went wrong")
+        // listenAndRespond();
     }).then(() => {
         listenAndRespond(); // is infinite recursion a problem? hopefully not haha
     });
@@ -74,7 +76,7 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 client.on(Events.MessageCreate, message => {
-    if (message.guildId != client.activeGuild || message.channelId != client.activeChannel) return;
+    if (message.guildId != client.activeGuild || message.channelId != client.activeChannel || message.author.bot) return;
 
     console.log(`new message\n${message.content}`);
 
@@ -82,5 +84,3 @@ client.on(Events.MessageCreate, message => {
 });
 
 client.login(token);
-
-// nice

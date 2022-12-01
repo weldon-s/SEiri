@@ -42,11 +42,13 @@ setColors((0, 0, 0))
 #audio setup
 import pyaudio
 import wave
+import audioop
 
 FORMAT = pyaudio.paInt16
 MAX_LENGTH = 20        # max number of seconds to record for
 CHANNELS = 1           # Number of channels
 BITRATE = 44100        # Audio Bitrate
+# RATE_PROCESS=16000
 RATE_PROCESS=16000
 CHUNK_SIZE = 512       # Chunk size to 
 WAVE_OUTPUT_FILENAME = "temp.wav"
@@ -65,7 +67,6 @@ import contextlib
 model = Model('/home/pi/SEiri/node/python/deepspeech-0.9.3-models.tflite')
 model.enableExternalScorer('/home/pi/SEiri/node/python/deepspeech-0.9.3-models.scorer')
 
-
 lerpColor((0, 100, 0), 50)
 
 # wait for the button to be pressed
@@ -77,10 +78,16 @@ while not begun:
         begun = True
         # Record
 
-# print("listening")
+print("!pause")
 
 recording_frames = []
 audio = pyaudio.PyAudio()
+
+# info = audio.get_host_api_info_by_index(0)
+# numdevices = info.get('deviceCount')
+# for i in range(0, numdevices):
+#     if (audio.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
+#         print("Input Device id ", i, " - ", audio.get_device_info_by_host_api_device_index(0, i).get('name'))
 
 stream = audio.open(
     format=FORMAT,
@@ -114,6 +121,8 @@ waveFile.setsampwidth(audio.get_sample_size(FORMAT))
 waveFile.setframerate(RATE_PROCESS)
 waveFile.writeframes(b''.join(recording_frames))
 waveFile.close()
+
+print("!resume")
 
 # all of this is from stackoverflow.com/questions/24820346/filtering-a-wav-file-using-python, and the respective references there
 # hand-written tho, i'm not copy pasting anything from the internet
@@ -174,5 +183,5 @@ fin.close()
 
 infered_text = model.stt(audio)
 
-print(infered_text)
+print(">" + infered_text)
 lerpColor((0, 0, 0), 150)

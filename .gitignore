@@ -1,9 +1,10 @@
 config.json
 node_modules
-python/audio
-python/bin
-python/include
-python/lib
-python/pyttsx3
-python/share
+node/python/audio
+node/python/bin
+node/python/include
+node/python/lib
+node/python/pyttsx3
+node/python/share
 deepspeech-audioread
+node/python/deepspeech*

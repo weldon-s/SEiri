@@ -9,10 +9,12 @@ import os
 SEARCH_STRING = "https://www.youtube.com/results?search_query="
 VIDEO_STRING = "https://www.youtube.com/"
 EXTENSION = "mp4"
-AUDIO_PATH = "node/youtube/audio"
-CONTROL_PATH = "node/youtube/control"
-
+AUDIO_PATH = "/home/pi/SEiri/node/youtube/audio"
+CONTROL_PATH = "/home/pi/SEiri/node/youtube/control"
+print("audio process begun")
 def fetchAudio(input):
+    print("fetching " + input)
+
     content = urllib.request.urlopen(SEARCH_STRING + input.replace(" ", "_"))
     suffix = re.findall(r"(watch\?v=\S{11})", content.read().decode())[0]
     video = YouTube(VIDEO_STRING + suffix)
@@ -37,7 +39,8 @@ currentSong = None
 songList = os.listdir(AUDIO_PATH)
 
 #0 for pause, 1 for play, 2 for selecting new song
-while True:
+for i in range(600): #for testing, stop after a minute 
+    print("audio running")
     text = getCommandText()
 
     if len(text) <= 0:
@@ -47,7 +50,7 @@ while True:
         media.pause()
 
         while(getCommandText() == '0'):
-            time.sleep(0.1)
+            time.sleep(1)
 
     if text[0] == '1' and media != None:
         media.play()
@@ -67,4 +70,4 @@ while True:
             media.play()
             currentSong = nextSong
 
-    time.sleep(0.1)
+    time.sleep(0.5)
