@@ -21,6 +21,8 @@ const optimalresponse = (input, responsearray) => {
 
 const responseObject = (keywords, response) => {return {keywords: keywords, response: response}};
 
+const HELLO_KEYWORDS = ['hello', 'hi'];
+const TIME_KEYWORDS = ['time'];
 const PHYSICS_KEYWORDS = ['physics', 'ece', 'one oh five'];
 const CALI_KEYWORDS = ['cali', 'california', 'co-op'];
 const POINTER_KEYWORDS = ['pointer', 'pointers'];
@@ -31,6 +33,26 @@ const CS_137_MEAN_KEYWORDS = ['cs', 'one thirty seven', 'midterm', 'average', 'm
 const MATH_117_MEAN_KEYWORDS = ['math', 'one seventeen', 'midterm', 'average', 'mean'];
 const MATH_135_FIRST_MEAN_KEYWORDS = ['math', 'one thirty five', 'midterm', 'average', 'mean', 'first'];
 const MATH_115_MEAN_KEYWORDS = ['math', 'one fifteen', 'midterm', 'average', 'mean'];
+const EMERGENCY_KEYWORDS = ['police', 'nine one one', 'ambulance', 'fire', 'call', 'called'];
+
+const helloResponse = () => 'Hello!';
+
+const timeResponse = () => {
+    let today = new Date();
+    let hours = today.getHours();
+    let minutes = today.getMinutes();
+    let AMorPM;
+
+    if(hours <= 12){
+        AMorPM = "A M";
+    }
+    else{
+        AMorPM = "P M";
+        hours -= 12;
+    }
+
+    return "It is currently " + hours + " " + minutes + " " + AMorPM;
+};
 
 const ece105midtermResponse = () => 'The average for the ece one oh five midterm was 58.9% and the median was 62.5%';
 const cs137midtermResponse = () => 'The average for the cs one thirty seven midterm was 76.9% and the median was 82%';
@@ -82,7 +104,10 @@ const randomResponse = () => {
     }
 }
 
+const emergencyResponse = () => "Ok. Dialing 9 - 1 - 1"
+
 const RESPONSE_ARRAY = [
+    responseObject(HELLO_KEYWORDS, helloResponse),
     responseObject(PHYSICS_KEYWORDS, physicsResponse),
     responseObject(CALI_KEYWORDS, caliResponse),
     responseObject(POINTER_KEYWORDS, pointerResponse),
@@ -92,7 +117,8 @@ const RESPONSE_ARRAY = [
     responseObject(CS_137_MEAN_KEYWORDS, cs137midtermResponse),
     responseObject(MATH_117_MEAN_KEYWORDS, math117midtermResponse),
     responseObject(MATH_135_FIRST_MEAN_KEYWORDS, math135firstmidtermResponse),
-    responseObject(MATH_115_MEAN_KEYWORDS, math115midtermResponse)
+    responseObject(MATH_115_MEAN_KEYWORDS, math115midtermResponse),
+    responseObject(EMERGENCY_KEYWORDS, emergencyResponse)
 ];
 
 //returns special response if one found, null otherwise
@@ -108,3 +134,5 @@ const generateResponse = (input) => {
 }
 
 module.exports = {generateResponse};
+
+console.log(timeResponse())
