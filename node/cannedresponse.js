@@ -112,6 +112,7 @@ const emergencyResponse = () => "Ok. Dialing 9 - 1 - 1"
 
 const RESPONSE_ARRAY = [
     responseObject(HELLO_KEYWORDS, helloResponse),
+    responseObject(TIME_KEYWORDS, timeResponse),
     responseObject(PHYSICS_KEYWORDS, physicsResponse),
     responseObject(CALI_KEYWORDS, caliResponse),
     responseObject(POINTER_KEYWORDS, pointerResponse),
