@@ -15,8 +15,9 @@ What is physics? 💫
 ```
 play nice ocean waves 🎵
 ```
+Use this project with Raspberry Pi 4B and the Adafruit Voice Bonnet!
 
 ## Contributors
-Kegan Allen, Weldon Scott, Evan Wang, Eric Zhang, Simon Zhang \n
-Software Engineering Class of 2027 - 1A \n
+Kegan Allen, Weldon Scott, Evan Wang, Eric Zhang, Simon Zhang \
+Software Engineering Class of 2027 - 1A \
 December 2, 2022
