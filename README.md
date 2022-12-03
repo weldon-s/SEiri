@@ -17,6 +17,6 @@ play nice ocean waves 🎵
 ```
 
 ## Contributors
-Kegan Allen, Weldon Scott, Evan Wang, Eric Zhang, Simon Zhang
-Software Engineering Class of 2027 - 1A
+Kegan Allen, Weldon Scott, Evan Wang, Eric Zhang, Simon Zhang \n
+Software Engineering Class of 2027 - 1A \n
 December 2, 2022
