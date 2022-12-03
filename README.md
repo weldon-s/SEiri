@@ -1,3 +1,4 @@
+![seiri](https://cdn.discordapp.com/attachments/1035171184528064625/1048410829869035590/Screen_Shot_2022-12-02_at_8.29.25_PM.png)
 # SEiri 
 
 Smart speaker software for Software Engineering students! 🧠
